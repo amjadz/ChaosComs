@@ -18,6 +18,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var passowrd: UITextField!
     
+    @IBAction func login_screen_button(_ sender: UIButton) {
+
+        let loginScreen = self.storyboard?.instantiateViewController(withIdentifier: "go_back") as! LoginViewController
+        
+        self.navigationController?.pushViewController(loginScreen, animated: true)
+    }
+    
     
     @IBAction func registe_button(_ sender: UIButton) {
         
@@ -32,22 +39,12 @@ class ViewController: UIViewController {
             return
         }
 
-        
-   
-//        if error != nil {
-//            print("Something Happend")
-//
-//        }
-//        else {
-
         registerUser(email: emailText, password: passwordText)
         let messageScreen = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! MessageViewController
             
         self.navigationController?.pushViewController(messageScreen, animated: true)
-//        }
         
 
-        
     }
     
     func registerUser(email: String, password: String) {
