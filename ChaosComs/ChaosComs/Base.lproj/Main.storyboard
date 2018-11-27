@@ -40,8 +40,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="login:" destination="hqc-bR-z22" eventType="touchUpInside" id="MPs-v4-i6b"/>
                                     <action selector="login_to_message:" destination="hqc-bR-z22" eventType="touchUpInside" id="iI0-JM-PDv"/>
-                                    <segue destination="UPg-Zy-1oP" kind="show" identifier="message_screen_log_in" id="cZb-Cg-SQk"/>
+                                    <segue destination="UPg-Zy-1oP" kind="show" identifier="message_screen" id="cZb-Cg-SQk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oy-3b-ylw">
@@ -58,16 +59,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Tzh-yr-X0m"/>
                     </view>
+                    <connections>
+                        <outlet property="email_login" destination="zpb-TW-mu2" id="UME-xH-pdr"/>
+                        <outlet property="password_login" destination="CoO-XZ-f9g" id="iPf-4u-sDE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgK-um-jGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xOg-5h-IRC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-754" y="-734"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChaosComs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RegistrationViewController" customModule="ChaosComs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -97,7 +102,7 @@
                                 <rect key="frame" x="71" y="342" width="232" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Register">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

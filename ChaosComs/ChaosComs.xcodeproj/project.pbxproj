@@ -11,7 +11,7 @@
 		5806575821ADBA21006F5A70 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806575721ADBA21006F5A70 /* MessageViewController.swift */; };
 		5806575A21ADE87B006F5A70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806575921ADE87B006F5A70 /* LoginViewController.swift */; };
 		58094A4521AC5BF4000942CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58094A4421AC5BF4000942CF /* AppDelegate.swift */; };
-		58094A4721AC5BF4000942CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58094A4621AC5BF4000942CF /* ViewController.swift */; };
+		58094A4721AC5BF4000942CF /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58094A4621AC5BF4000942CF /* RegistrationViewController.swift */; };
 		58094A4A21AC5BF4000942CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58094A4821AC5BF4000942CF /* Main.storyboard */; };
 		58094A4C21AC5BF5000942CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58094A4B21AC5BF5000942CF /* Assets.xcassets */; };
 		58094A4F21AC5BF5000942CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58094A4D21AC5BF5000942CF /* LaunchScreen.storyboard */; };
@@ -24,7 +24,7 @@
 		5806575921ADE87B006F5A70 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		58094A4121AC5BF4000942CF /* ChaosComs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChaosComs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58094A4421AC5BF4000942CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		58094A4621AC5BF4000942CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		58094A4621AC5BF4000942CF /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		58094A4921AC5BF4000942CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58094A4B21AC5BF5000942CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58094A4E21AC5BF5000942CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				58094A4421AC5BF4000942CF /* AppDelegate.swift */,
-				58094A4621AC5BF4000942CF /* ViewController.swift */,
+				58094A4621AC5BF4000942CF /* RegistrationViewController.swift */,
 				58094A4821AC5BF4000942CF /* Main.storyboard */,
 				5806575921ADE87B006F5A70 /* LoginViewController.swift */,
 				58094A4B21AC5BF5000942CF /* Assets.xcassets */,
@@ -178,6 +178,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChaosComs/Pods-ChaosComs-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
@@ -187,6 +188,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
@@ -225,7 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5806575A21ADE87B006F5A70 /* LoginViewController.swift in Sources */,
-				58094A4721AC5BF4000942CF /* ViewController.swift in Sources */,
+				58094A4721AC5BF4000942CF /* RegistrationViewController.swift in Sources */,
 				5806575821ADBA21006F5A70 /* MessageViewController.swift in Sources */,
 				58094A4521AC5BF4000942CF /* AppDelegate.swift in Sources */,
 			);

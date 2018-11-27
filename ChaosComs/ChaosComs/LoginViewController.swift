@@ -7,9 +7,36 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
+    
+    @IBOutlet weak var email_login: UITextField!
+    
+    @IBOutlet weak var password_login: UITextField!
+    
+    
+    @IBAction func login(_ sender: Any) {
+        guard let email_login_text = email_login.text  else {
+            return
+            
+        }
+        
+        guard let password_login_text = password_login.text else {
+            return
+        }
+        
+        loginFirebase(email: email_login_text, password: password_login_text)
+        
+        let loginScreenToMessage = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! MessageViewController
+        
+        self.navigationController?.pushViewController(loginScreenToMessage, animated: true)
+        
+    }
+    
+    
+    
     @IBAction func go_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         
@@ -20,6 +47,13 @@ class LoginViewController: UIViewController {
         let login_to_message = self.storyboard?.instantiateViewController(withIdentifier: "message_screen_log_in") as! MessageViewController
         
         self.navigationController?.pushViewController(login_to_message, animated: true)
+        
+    }
+    
+    func loginFirebase(email: String, password: String){
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            print("Works")
+        }
         
     }
     

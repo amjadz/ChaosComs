@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class RegistrationViewController: UIViewController {
 
 
     @IBOutlet weak var username: UITextField!
@@ -43,6 +43,10 @@ class ViewController: UIViewController {
         let messageScreen = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! MessageViewController
             
         self.navigationController?.pushViewController(messageScreen, animated: true)
+        
+        var ref: DatabaseReference!
+        
+        ref = Database.database().reference()
         
 
     }
