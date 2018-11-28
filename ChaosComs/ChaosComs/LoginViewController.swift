@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func login_to_message(_ sender: Any) {
-        let login_to_message = self.storyboard?.instantiateViewController(withIdentifier: "message_screen_log_in") as! MessageViewController
+        let login_to_message = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! MessageViewController
         
         self.navigationController?.pushViewController(login_to_message, animated: true)
         
