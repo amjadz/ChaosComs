@@ -125,7 +125,7 @@
                     </view>
                     <connections>
                         <outlet property="email" destination="t14-0z-hxO" id="Vaw-iN-ySp"/>
-                        <outlet property="passowrd" destination="meF-0B-0ZW" id="qiK-cN-ZWf"/>
+                        <outlet property="password" destination="meF-0B-0ZW" id="nDj-bM-99z"/>
                         <outlet property="username" destination="9x8-bR-ZJA" id="Aju-tZ-azM"/>
                     </connections>
                 </viewController>

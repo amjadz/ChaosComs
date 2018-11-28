@@ -16,7 +16,7 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var email: UITextField!
     
-    @IBOutlet weak var passowrd: UITextField!
+    @IBOutlet weak var password: UITextField!
     
     @IBAction func login_screen_button(_ sender: UIButton) {
 
@@ -34,7 +34,7 @@ class RegistrationViewController: UIViewController {
             
         }
         
-        guard let passwordText = passowrd.text else  {
+        guard let passwordText = password.text else  {
             print("Didn't work")
             return
         }
@@ -44,11 +44,24 @@ class RegistrationViewController: UIViewController {
             
         self.navigationController?.pushViewController(messageScreen, animated: true)
         
-        var ref: DatabaseReference!
         
-        ref = Database.database().reference()
         
+        
+        let ref: DatabaseReference! = Database.database().reference()
+        let currentUser = Auth.auth().currentUser
+        
+        guard let currentUserID = currentUser?.uid else { return }
+        
+        let userIDRef = ref.child("users").child(currentUserID)
+        let nameRef = userIDRef.child("name")
+        let passwordRef = userIDRef.child("password")
+        let emailRef = userIDRef.child("email")
 
+
+        nameRef.setValue(username.text)
+        passwordRef.setValue(passwordText)
+        emailRef.setValue(emailText)
+        
     }
     
     func registerUser(email: String, password: String) {
