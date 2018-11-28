@@ -30,7 +30,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAC-pf-gU2">
                                 <rect key="frame" x="72" y="271" width="230" height="30"/>
@@ -42,7 +42,7 @@
                                 <connections>
                                     <action selector="login:" destination="hqc-bR-z22" eventType="touchUpInside" id="MPs-v4-i6b"/>
                                     <action selector="login_to_message:" destination="hqc-bR-z22" eventType="touchUpInside" id="iI0-JM-PDv"/>
-                                    <segue destination="UPg-Zy-1oP" kind="show" identifier="message_screen" id="cZb-Cg-SQk"/>
+                                    <segue destination="UPg-Zy-1oP" kind="show" identifier="message_screen" id="uJ7-sB-dwq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oy-3b-ylw">
@@ -67,7 +67,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgK-um-jGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xOg-5h-IRC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-754" y="-734"/>
+            <point key="canvasLocation" x="-769" y="-735"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -89,7 +89,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t14-0z-hxO">
                                 <rect key="frame" x="71" y="210" width="232" height="30"/>
@@ -150,6 +150,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LF1-bV-lrA"/>
+        <segue reference="uJ7-sB-dwq"/>
     </inferredMetricsTieBreakers>
 </document>

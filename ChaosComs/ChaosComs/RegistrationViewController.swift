@@ -45,8 +45,6 @@ class RegistrationViewController: UIViewController {
         self.navigationController?.pushViewController(messageScreen, animated: true)
         
         
-        
-        
         let ref: DatabaseReference! = Database.database().reference()
         let currentUser = Auth.auth().currentUser
         
@@ -66,8 +64,6 @@ class RegistrationViewController: UIViewController {
     
     func registerUser(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-            print("ded")
-
             guard let user = authResult?.user else { return }
         }
 
