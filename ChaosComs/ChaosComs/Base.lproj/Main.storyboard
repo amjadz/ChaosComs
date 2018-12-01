@@ -133,10 +133,10 @@
             </objects>
             <point key="canvasLocation" x="-754" y="15"/>
         </scene>
-        <!--Message View Controller-->
+        <!--Select User View Controller-->
         <scene sceneID="BI7-jU-OyT">
             <objects>
-                <viewController storyboardIdentifier="message_screen" id="UPg-Zy-1oP" customClass="MessageViewController" customModule="ChaosComs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="message_screen" id="UPg-Zy-1oP" customClass="SelectUserViewController" customModule="ChaosComs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iNg-7Z-vd6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,6 +149,13 @@
                                     <action selector="signout:" destination="UPg-Zy-1oP" eventType="touchUpInside" id="AqZ-DM-dNO"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Users" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xdc-Gd-QPg">
+                                <rect key="frame" x="49" y="58" width="277" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ktD-Jb-XjX"/>
@@ -156,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1nA-Y6-tfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="705" y="-459"/>
+            <point key="canvasLocation" x="704.79999999999995" y="-459.22038980509751"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

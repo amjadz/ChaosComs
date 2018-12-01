@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MessageViewController: UIViewController {
+class SelectUserViewController: UIViewController {
 
     @IBAction func signout(_ sender: Any) {
         do {
