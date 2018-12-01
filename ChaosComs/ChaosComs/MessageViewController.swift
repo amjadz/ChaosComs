@@ -7,9 +7,23 @@
 //
 
 import UIKit
+import Firebase
 
 class MessageViewController: UIViewController {
 
+    @IBAction func signout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Error")
+            
+        }
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
