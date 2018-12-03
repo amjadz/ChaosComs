@@ -77,27 +77,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="NAb-wK-WCs">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Online Users" id="iLL-QJ-uSd">
+                                    <barButtonItem key="leftBarButtonItem" title="Signout" id="nUn-yF-ZpS">
+                                        <connections>
+                                            <segue destination="hqc-bR-z22" kind="show" id="Qzx-wP-S7P"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="92" id="Fk0-Q3-N48">
-                                <rect key="frame" x="0.0" y="28" width="375" height="92"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fk0-Q3-N48" id="g9n-Th-HaI">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZe-6p-iL3">
-                                            <rect key="frame" x="28" y="35" width="331" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZe-6p-iL3">
+                                            <rect key="frame" x="22" y="11" width="331" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="TZe-6p-iL3" secondAttribute="bottom" constant="35.5" id="LNs-ib-j3D"/>
-                                        <constraint firstItem="TZe-6p-iL3" firstAttribute="leading" secondItem="g9n-Th-HaI" secondAttribute="leading" constant="28" id="XrO-eS-pyI"/>
-                                        <constraint firstAttribute="trailing" secondItem="TZe-6p-iL3" secondAttribute="trailing" constant="16" id="rxu-Zq-Cto"/>
-                                        <constraint firstItem="TZe-6p-iL3" firstAttribute="top" secondItem="g9n-Th-HaI" secondAttribute="top" constant="35" id="wAy-1c-YQk"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -109,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9K4-z0-Quj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="282.39999999999998" y="-374.66266866566718"/>
+            <point key="canvasLocation" x="401" y="-630"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -177,6 +185,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BEA-MR-Hhw"/>
+        <segue reference="nG1-2I-7fv"/>
+        <segue reference="Qzx-wP-S7P"/>
     </inferredMetricsTieBreakers>
 </document>

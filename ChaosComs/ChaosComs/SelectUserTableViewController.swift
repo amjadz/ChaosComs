@@ -9,14 +9,25 @@
 import UIKit
 import Firebase
 
-
 struct User {
-    let name: String!
-    let uid: String!
+    let name: String?
+    let uid: String?
 }
 
 
 class SelectUserTableViewController: UITableViewController {
+    
+    @IBAction func goBackToLogin(_ sender: UIBarButtonItem) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     
     var users = [User]()
 
@@ -26,8 +37,7 @@ class SelectUserTableViewController: UITableViewController {
         
         let ref: DatabaseReference! = Database.database().reference()
         
-        ref.child("users").child(uid!).queryOrderedByKey().observe(.childAdded) { (snapshot) in
-            
+        ref.child("users").queryOrderedByKey().observe(.childAdded) { (snapshot) in
             let name = (snapshot.value as? NSDictionary)?["name"] as? String ?? ""
             
             let uid = (snapshot.value as? NSDictionary)?["uid"] as? String ?? ""
@@ -43,7 +53,7 @@ class SelectUserTableViewController: UITableViewController {
     }
      
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return users.count
     }
 
     
