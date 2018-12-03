@@ -40,9 +40,9 @@ class RegistrationViewController: UIViewController {
         }
 
         registerUser(email: emailText, password: passwordText)
-        let messageScreen = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! MessageViewController
+        let selectUserScreen = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
             
-        self.navigationController?.pushViewController(messageScreen, animated: true)
+        self.navigationController?.pushViewController(selectUserScreen, animated: true)
         
         
         let ref: DatabaseReference! = Database.database().reference()
@@ -51,6 +51,7 @@ class RegistrationViewController: UIViewController {
         guard let currentUserID = currentUser?.uid else { return }
         
         let userIDRef = ref.child("users").child(currentUserID)
+        let userUid = userIDRef.child("uid")
         let nameRef = userIDRef.child("name")
         let passwordRef = userIDRef.child("password")
         let emailRef = userIDRef.child("email")
@@ -59,6 +60,7 @@ class RegistrationViewController: UIViewController {
         nameRef.setValue(username.text)
         passwordRef.setValue(passwordText)
         emailRef.setValue(emailText)
+        userUid.setValue(currentUserID)
         
     }
     

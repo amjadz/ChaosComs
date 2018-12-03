@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		21D6E697495084EC06375D6E /* Pods_ChaosComs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19AB12883F55F3D657398BE6 /* Pods_ChaosComs.framework */; };
-		5806575821ADBA21006F5A70 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806575721ADBA21006F5A70 /* MessageViewController.swift */; };
 		5806575A21ADE87B006F5A70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806575921ADE87B006F5A70 /* LoginViewController.swift */; };
 		58094A4521AC5BF4000942CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58094A4421AC5BF4000942CF /* AppDelegate.swift */; };
 		58094A4721AC5BF4000942CF /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58094A4621AC5BF4000942CF /* RegistrationViewController.swift */; };
@@ -16,11 +15,11 @@
 		58094A4C21AC5BF5000942CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58094A4B21AC5BF5000942CF /* Assets.xcassets */; };
 		58094A4F21AC5BF5000942CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58094A4D21AC5BF5000942CF /* LaunchScreen.storyboard */; };
 		58094A5721AC5CB2000942CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58094A5621AC5CB2000942CF /* GoogleService-Info.plist */; };
+		5861CAAC21B492E50067960F /* SelectUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5861CAAB21B492E50067960F /* SelectUserTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		19AB12883F55F3D657398BE6 /* Pods_ChaosComs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaosComs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5806575721ADBA21006F5A70 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		5806575921ADE87B006F5A70 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		58094A4121AC5BF4000942CF /* ChaosComs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChaosComs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58094A4421AC5BF4000942CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +29,7 @@
 		58094A4E21AC5BF5000942CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58094A5021AC5BF5000942CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58094A5621AC5CB2000942CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5861CAAB21B492E50067960F /* SelectUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserTableViewController.swift; sourceTree = "<group>"; };
 		81F9EEAC2148DA7B43CF4BB8 /* Pods-ChaosComs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaosComs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChaosComs/Pods-ChaosComs.debug.xcconfig"; sourceTree = "<group>"; };
 		FABAB8028DC89B479F27F09E /* Pods-ChaosComs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaosComs.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChaosComs/Pods-ChaosComs.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,12 +87,12 @@
 				58094A4421AC5BF4000942CF /* AppDelegate.swift */,
 				58094A4621AC5BF4000942CF /* RegistrationViewController.swift */,
 				58094A4821AC5BF4000942CF /* Main.storyboard */,
+				5861CAAB21B492E50067960F /* SelectUserTableViewController.swift */,
 				5806575921ADE87B006F5A70 /* LoginViewController.swift */,
 				58094A4B21AC5BF5000942CF /* Assets.xcassets */,
 				58094A4D21AC5BF5000942CF /* LaunchScreen.storyboard */,
 				58094A5621AC5CB2000942CF /* GoogleService-Info.plist */,
 				58094A5021AC5BF5000942CF /* Info.plist */,
-				5806575721ADBA21006F5A70 /* MessageViewController.swift */,
 			);
 			path = ChaosComs;
 			sourceTree = "<group>";
@@ -227,8 +227,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5806575A21ADE87B006F5A70 /* LoginViewController.swift in Sources */,
+				5861CAAC21B492E50067960F /* SelectUserTableViewController.swift in Sources */,
 				58094A4721AC5BF4000942CF /* RegistrationViewController.swift in Sources */,
-				5806575821ADBA21006F5A70 /* MessageViewController.swift in Sources */,
 				58094A4521AC5BF4000942CF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

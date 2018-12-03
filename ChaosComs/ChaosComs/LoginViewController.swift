@@ -16,7 +16,6 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var password_login: UITextField!
     
-    
     @IBAction func login(_ sender: Any) {
         guard let email_login_text = email_login.text  else {
             return
@@ -29,7 +28,7 @@ class LoginViewController: UIViewController {
         
         loginFirebase(email: email_login_text, password: password_login_text)
         
-        let loginScreenToMessage = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! MessageViewController
+        let loginScreenToMessage = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
         
         self.navigationController?.pushViewController(loginScreenToMessage, animated: true)
         
@@ -44,7 +43,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func login_to_message(_ sender: Any) {
-        let login_to_message = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! MessageViewController
+        let login_to_message = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
         
         self.navigationController?.pushViewController(login_to_message, animated: true)
         

@@ -22,6 +22,11 @@ class SelectUserViewController: UIViewController {
         
     }
     
+    @IBAction func createNewChannel(_ sender: Any) {
+        
+        
+        
+    }
     
     
     override func viewDidLoad() {
