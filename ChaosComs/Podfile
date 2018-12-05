@@ -4,12 +4,12 @@
 target 'ChaosComs' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+	project 'ChaosComs.xcodeproj'
   # Pods for ChaosComs
 	pod 'Firebase/Core'
 	pod "youtube-ios-player-helper", "~> 0.1.4"
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'	
-
+	pod 'MessageKit'
 end
  
