@@ -14,13 +14,14 @@ import Firebase
 class ChatViewController: MessagesViewController {
     var messages: [Message] = []
     var member: Member!
+    var color: UIColor = .blue
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        member = Member(name: Auth.auth().currentUser?.email ?? "someuser", color: .random)
+        color = .random
+        member = Member(name: Auth.auth().currentUser?.displayName ?? "someuser", uid: Auth.auth().currentUser?.uid ?? "1234", email: Auth.auth().currentUser?.email ?? "no email")
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
@@ -36,7 +37,7 @@ extension ChatViewController: MessagesDataSource {
     }
     
     func currentSender() -> Sender {
-        return Sender(id: member.name, displayName: member.name)
+        return Sender(id: member.uid, displayName: member.name)
     }
     
     func messageForItem(
@@ -79,11 +80,11 @@ extension ChatViewController: MessagesDisplayDelegate {
         _ avatarView: AvatarView,
         for message: MessageType,
         at indexPath: IndexPath,
-        in messagesCollectionView: MessagesCollectionView) {
-        
-        let message = messages[indexPath.section]
-        let color = message.member.color
-        avatarView.backgroundColor = color
+        in messagesCollectionView: MessagesCollectionView)
+    {
+        //let message = messages[indexPath.section]
+        //let color = message.member.color
+        avatarView.backgroundColor = self.color
     }
 }
 
@@ -96,6 +97,12 @@ extension ChatViewController: MessageInputBarDelegate {
             member: member,
             text: text,
             messageId: UUID().uuidString)
+        
+        let ref = Constants.refs.databaseChats.childByAutoId()
+        
+        let message = ["sender_id": member.uid, "name": member.name, "text": text]
+        
+        ref.setValue(message)
         
         messages.append(newMessage)
         inputBar.inputTextView.text = ""
