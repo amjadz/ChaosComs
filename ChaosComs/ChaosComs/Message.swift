@@ -19,19 +19,17 @@ struct Constants {
     }
 }
 
-struct Member {
+
+struct User {
     let name: String
     let uid: String
-    let email: String
-    //let color: UIColor
 }
 
-extension Member {
+extension User {
     var toJSON: Any {
         return [
             "name": name,
             "uid": uid,
-            "email": email,
             //"color": color.hexString
         ]
     }
@@ -40,23 +38,21 @@ extension Member {
         guard
             let data = json as? [String: Any],
             let name = data["name"] as? String,
-            let uid = data["uid"] as? String,
-            let email = data["email"] as? String
+            let uid = data["uid"] as? String
             //let hexColor = data["color"] as? String
             else {
-                print("Couldn't parse Member")
+                print("Couldn't parse User")
                 return nil
         }
         
         self.name = name
-        self.email = email
         self.uid = uid
         //self.color = UIColor(hex: hexColor)
     }
 }
 
 struct Message {
-    let member: Member
+    let member: User
     let text: String
     let messageId: String
 }

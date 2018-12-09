@@ -13,19 +13,38 @@ import Firebase
 
 class ChatViewController: MessagesViewController {
     var messages: [Message] = []
-    var member: Member!
+    var member: User!
     var color: UIColor = .blue
+    var selectedUser: User!
+    
+    // let ref: DatabaseReference! = Database.database().reference()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         color = .random
-        member = Member(name: Auth.auth().currentUser?.displayName ?? "someuser", uid: Auth.auth().currentUser?.uid ?? "1234", email: Auth.auth().currentUser?.email ?? "no email")
+        member = User(name: Auth.auth().currentUser?.displayName ?? "someuser", uid: Auth.auth().currentUser?.uid ?? "1234")
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        // add connection to new messages here
+//        let text = "I love pizza, what is your favorite kind?"
+//        let testMessage = Message(member: selectedUser, text: text, messageId: UUID().uuidString)
+//        insertNewMessage(testMessage)
+    }
+    
+    private func insertNewMessage(_ message: Message) {
+        let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
+        let messageJson = ["sender_id": message.member.uid, "name": message.member.name, "text": message.text]
+        ref.setValue(messageJson)
+        messagesCollectionView.scrollToBottom(animated: true)
+        
+        messages.append(message)
+        messagesCollectionView.reloadData()
     }
 
 }
@@ -98,10 +117,8 @@ extension ChatViewController: MessageInputBarDelegate {
             text: text,
             messageId: UUID().uuidString)
         
-        let ref = Constants.refs.databaseChats.childByAutoId()
-        
+        let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
         let message = ["sender_id": member.uid, "name": member.name, "text": text]
-        
         ref.setValue(message)
         
         messages.append(newMessage)

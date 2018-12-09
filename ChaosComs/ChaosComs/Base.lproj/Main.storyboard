@@ -122,7 +122,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="R5O-DH-ZQY" kind="show" id="56J-7I-XMZ"/>
+                                    <segue destination="R5O-DH-ZQY" kind="show" identifier="toChatSegue" id="56J-7I-XMZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

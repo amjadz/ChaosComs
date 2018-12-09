@@ -9,11 +9,6 @@
 import UIKit
 import Firebase
 
-struct User {
-    let name: String?
-    let uid: String?
-}
-
 
 class SelectUserTableViewController: UITableViewController {
     
@@ -64,5 +59,12 @@ class SelectUserTableViewController: UITableViewController {
         let nameTxtField = cell.viewWithTag(1) as! UILabel
         nameTxtField.text = users[indexPath.row].name
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let selectedPath = tableView.indexPathForSelectedRow else { return }
+        if let target = segue.destination as? ChatViewController {
+            target.selectedUser = users[selectedPath.row]
+        }
     }
 }
