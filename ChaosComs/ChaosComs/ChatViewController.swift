@@ -10,6 +10,7 @@ import UIKit
 import MessageKit
 import MessageInputBar
 import Firebase
+import Alamofire
 
 class ChatViewController: MessagesViewController {
     var messages: [Message] = []
@@ -18,6 +19,12 @@ class ChatViewController: MessagesViewController {
     var selectedUser: User!
     
     var initRef: DatabaseReference!
+    
+    let tagger: NSLinguisticTagger = NSLinguisticTagger(tagSchemes: [.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
+    let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
+    
+
+
     
     @IBOutlet weak var backBar: UIToolbar!
     
@@ -62,6 +69,32 @@ class ChatViewController: MessagesViewController {
 //        insertNewMessage(testMessage)
     }
     
+    func startRequestData(query: String) {
+        
+        let params: [String: Any] = ["part":"snippet", "q":"\(query)", "type":"video", "key":"AIzaSyAdV6HRuk3Cz7MgNXbBzClwqlZDjBVOaJc"]
+        
+        AF.request("https://www.googleapis.com/youtube/v3/search", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            
+            if let JSON = response.result.value  as?  [String : Any] {
+                
+                if let items =  JSON["items"] as? [[String : Any]] {
+                    let item = items[0]
+                    let ids = item["id"] as? NSDictionary
+                    //self.vidID = (ids?["videoId"] as? String)!
+                    //print(self.vidID)
+                    //self.playerView.load(withVideoId: self.vidID)
+                    let itemDescription = item["snippet"] as? NSDictionary
+                    let thumbnails = itemDescription?["thumbnails"] as? NSDictionary
+                    let defaultThumbnail = thumbnails?["medium"] as? NSDictionary
+                    let defaultURL = defaultThumbnail?["url"] as? String
+                    print(item)
+                    //print(defaultURL)
+                    //self.loadImage(img: defaultURL ?? "")
+                }
+            }
+        }
+    }
+    
     private func insertNewMessage(_ message: Message) {
         let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
         let messageJson = ["sender_id": message.member.uid, "name": message.member.name, "text": message.text]
@@ -69,6 +102,50 @@ class ChatViewController: MessagesViewController {
         
         messagesCollectionView.scrollToBottom(animated: true)
     }
+
+    
+    private func determineLanguage(for text: String) {
+        tagger.string = text
+        let language = tagger.dominantLanguage
+        print("The language is \(language)")
+        //tokenizeText(for: text)
+        //partsOfSpeech(for: text)
+        namedEntityRecognition(for: text)
+    }
+    
+    private func tokenizeText(for text: String) {
+        tagger.string = text
+        let range = NSRange(location: 0, length: text.utf16.count)
+        tagger.enumerateTags(in: range, unit: .word, scheme: .tokenType, options: options) { tag, tokenRange, stop in
+            let word = (text as NSString).substring(with: tokenRange)
+            print(word)
+        }
+    }
+    
+    private func partsOfSpeech(for text: String) {
+        tagger.string = text
+        let range = NSRange(location: 0, length: text.utf16.count)
+        tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in
+            if let tag = tag {
+                let word = (text as NSString).substring(with: tokenRange)
+                print("\(word): \(tag.rawValue)")
+            }
+        }
+    }
+    
+    private func namedEntityRecognition(for text: String) {
+        tagger.string = text
+        let range = NSRange(location: 0, length: text.utf16.count)
+        let tags: [NSLinguisticTag] = [.personalName, .placeName, .organizationName, .noun, .verb]
+        tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, stop in
+            if let tag = tag, tags.contains(tag) {
+                let name = (text as NSString).substring(with: tokenRange)
+                print("\(name): \(tag.rawValue)")
+            }
+        }
+    }
+    
+    
 
 }
 
@@ -144,6 +221,8 @@ extension ChatViewController: MessageInputBarDelegate {
         let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
         let message = ["sender_id": member.uid, "name": member.name, "text": text]
         ref.setValue(message)
+        
+        self.namedEntityRecognition(for: text)
         
         inputBar.inputTextView.text = ""
     }
