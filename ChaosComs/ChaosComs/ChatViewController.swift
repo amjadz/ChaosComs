@@ -19,6 +19,7 @@ class ChatViewController: MessagesViewController {
     
     var initRef: DatabaseReference!
     
+    @IBOutlet weak var backBar: UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,7 @@ class ChatViewController: MessagesViewController {
         
         
         self.messagesCollectionView.scrollToBottom(animated: true)
+        self.view.bringSubviewToFront(backBar)
         
         // test message
 //        let text = "Hello again, I'm still a phantom"
@@ -101,6 +103,12 @@ extension ChatViewController: MessagesDataSource {
         
         return NSAttributedString(
             string: message.sender.displayName,
+            attributes: [.font: UIFont.systemFont(ofSize: 12)])
+    }
+    
+    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        return NSAttributedString(
+            string: "Stoneee",
             attributes: [.font: UIFont.systemFont(ofSize: 12)])
     }
 }

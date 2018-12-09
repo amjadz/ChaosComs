@@ -122,7 +122,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="R5O-DH-ZQY" kind="show" identifier="toChatSegue" id="56J-7I-XMZ"/>
+                                    <segue destination="R5O-DH-ZQY" kind="show" id="56J-7I-XMZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -143,13 +143,33 @@
                     <view key="view" contentMode="scaleToFill" id="aJ5-nv-GN9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mew-B7-UFi" userLabel="backView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Back" id="2DI-HJ-n91">
+                                        <connections>
+                                            <segue destination="BdH-yq-nYZ" kind="show" id="Cy6-wG-A7t"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Mew-B7-UFi" firstAttribute="top" secondItem="f8s-sO-WOI" secondAttribute="top" id="QBc-4h-nQ5"/>
+                            <constraint firstItem="Mew-B7-UFi" firstAttribute="leading" secondItem="aJ5-nv-GN9" secondAttribute="leading" id="X3U-oM-ByU"/>
+                            <constraint firstAttribute="trailing" secondItem="Mew-B7-UFi" secondAttribute="trailing" id="ZFg-ym-Kuu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="f8s-sO-WOI"/>
                     </view>
+                    <connections>
+                        <outlet property="backBar" destination="Mew-B7-UFi" id="zqW-xB-irb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wh8-Mm-r0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="-629"/>
+            <point key="canvasLocation" x="1290.4000000000001" y="-629.2353823088456"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -229,7 +249,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BEA-MR-Hhw"/>
+        <segue reference="Cy6-wG-A7t"/>
         <segue reference="Qzx-wP-S7P"/>
     </inferredMetricsTieBreakers>
 </document>
