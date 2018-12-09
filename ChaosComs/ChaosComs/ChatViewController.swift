@@ -145,6 +145,32 @@ class ChatViewController: MessagesViewController {
         }
     }
     
+//    private func loadImage(img: String) {
+//        let imageUrl:URL = URL(string: img)!
+//        
+//        // Start background thread so that image loading does not make app unresponsive
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            
+//            let imageData:NSData = NSData(contentsOf: imageUrl)!
+//            let imageView = self.imgContainer
+//            imageView?.center = self.view.center
+//            let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.tappedImage))
+//            self.imgContainer.isUserInteractionEnabled = true
+//            self.imgContainer.addGestureRecognizer(singleTap)
+//            
+//            // When from background thread, UI needs to be updated on main_queue
+//            DispatchQueue.main.async {
+//                let image = UIImage(data: imageData as Data)
+//                imageView?.image = image
+//            }
+//        }
+//    }
+//    
+//    @objc func tappedImage() {
+//        print("tapped image")
+//        
+//    }
+    
     
 
 }
