@@ -17,7 +17,7 @@ class ChatViewController: MessagesViewController {
     var color: UIColor = .blue
     var selectedUser: User!
     
-    // let ref: DatabaseReference! = Database.database().reference()
+    var initRef: DatabaseReference!
     
     
     override func viewDidLoad() {
@@ -31,8 +31,31 @@ class ChatViewController: MessagesViewController {
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
-        // add connection to new messages here
-//        let text = "I love pizza, what is your favorite kind?"
+        initRef = Constants.refs.databaseChats.child(member.name + selectedUser.name)
+        initRef.queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+            if snapshot.childrenCount > 0 {
+                let name = (snapshot.value as? NSDictionary)?["name"] as? String ?? "name"
+                let id = (snapshot.value as? NSDictionary)?["sender_id"] as? String ?? "id"
+                let text = (snapshot.value as? NSDictionary)?["text"] as? String ?? "text"
+                
+                let user: User!
+                if name == self.member.name {
+                    user = self.member
+                } else {
+                    user = self.selectedUser
+                }
+                
+                let loadMsg = Message(member: user, text: text, messageId: id)
+                self.messages.append(loadMsg)
+                self.messagesCollectionView.reloadData()
+            }
+        })
+        
+        
+        self.messagesCollectionView.scrollToBottom(animated: true)
+        
+        // test message
+//        let text = "Hello again, I'm still a phantom"
 //        let testMessage = Message(member: selectedUser, text: text, messageId: UUID().uuidString)
 //        insertNewMessage(testMessage)
     }
@@ -41,10 +64,8 @@ class ChatViewController: MessagesViewController {
         let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
         let messageJson = ["sender_id": message.member.uid, "name": message.member.name, "text": message.text]
         ref.setValue(messageJson)
-        messagesCollectionView.scrollToBottom(animated: true)
         
-        messages.append(message)
-        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToBottom(animated: true)
     }
 
 }
@@ -112,18 +133,10 @@ extension ChatViewController: MessageInputBarDelegate {
         _ inputBar: MessageInputBar,
         didPressSendButtonWith text: String) {
         
-        let newMessage = Message(
-            member: member,
-            text: text,
-            messageId: UUID().uuidString)
-        
         let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
         let message = ["sender_id": member.uid, "name": member.name, "text": text]
         ref.setValue(message)
         
-        messages.append(newMessage)
         inputBar.inputTextView.text = ""
-        messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToBottom(animated: true)
     }
 }

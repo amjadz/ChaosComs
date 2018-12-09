@@ -34,7 +34,7 @@ class SelectUserTableViewController: UITableViewController {
         
         ref.child("users").queryOrderedByKey().observe(.childAdded) { (snapshot) in
             let name = (snapshot.value as? NSDictionary)?["name"] as? String ?? ""
-            
+
             let uid = (snapshot.value as? NSDictionary)?["uid"] as? String ?? ""
             
             self.users.append(User(name: name, uid: uid))
