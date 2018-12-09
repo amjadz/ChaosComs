@@ -49,6 +49,12 @@ class LoginViewController: UIViewController {
         
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let target = segue.destination as? SelectUserTableViewController {
+//            target.member = User()
+//        }
+//    }
+    
     func loginFirebase(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             print("Works")

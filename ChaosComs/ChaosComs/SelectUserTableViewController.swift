@@ -11,6 +11,9 @@ import Firebase
 
 
 class SelectUserTableViewController: UITableViewController {
+    var member: User!
+    
+    var users = [User]()
     
     @IBAction func goBackToLogin(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
@@ -23,8 +26,6 @@ class SelectUserTableViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
         
     }
-    
-    var users = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
