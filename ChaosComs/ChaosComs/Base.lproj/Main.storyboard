@@ -92,7 +92,7 @@
                                 <navigationItem title="Online Users" id="iLL-QJ-uSd">
                                     <barButtonItem key="leftBarButtonItem" title="Signout" id="nUn-yF-ZpS">
                                         <connections>
-                                            <segue destination="hqc-bR-z22" kind="show" id="Qzx-wP-S7P"/>
+                                            <action selector="goBackToLogin:" destination="BdH-yq-nYZ" id="5OP-Fn-Yvz"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -249,6 +249,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="56J-7I-XMZ"/>
         <segue reference="Cy6-wG-A7t"/>
-        <segue reference="Qzx-wP-S7P"/>
     </inferredMetricsTieBreakers>
 </document>

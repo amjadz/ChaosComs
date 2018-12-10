@@ -19,6 +19,7 @@ class SelectUserTableViewController: UITableViewController {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            print("Signed Out")
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
