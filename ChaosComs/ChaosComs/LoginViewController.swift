@@ -28,10 +28,6 @@ class LoginViewController: UIViewController {
         
         loginFirebase(email: email_login_text, password: password_login_text)
         
-        let loginScreenToMessage = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-        
-        self.navigationController?.pushViewController(loginScreenToMessage, animated: true)
-        
     }
     
     
@@ -57,8 +53,15 @@ class LoginViewController: UIViewController {
     
     func loginFirebase(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            print("Works")
+            if error == nil {
+                let loginScreenToMessage = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
+                
+                self.navigationController?.pushViewController(loginScreenToMessage, animated: true)
+            } else {
+                print("Login Failed!")
+            }
         }
+        
         
     }
     

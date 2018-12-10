@@ -17,14 +17,10 @@ class ChatViewController: MessagesViewController {
     var member: User!
     var color: UIColor = .blue
     var selectedUser: User!
-    
     var initRef: DatabaseReference!
     
     let tagger: NSLinguisticTagger = NSLinguisticTagger(tagSchemes: [.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
     let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
-    
-
-
     
     @IBOutlet weak var backBar: UIToolbar!
     
@@ -39,7 +35,11 @@ class ChatViewController: MessagesViewController {
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
-        initRef = Constants.refs.databaseChats.child(member.name + selectedUser.name)
+        if member.name < selectedUser.name {
+            initRef = Constants.refs.databaseChats.child(member.name + selectedUser.name)
+        } else {
+            initRef = Constants.refs.databaseChats.child(selectedUser.name + member.name)
+        }
         initRef.queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
             if snapshot.childrenCount > 0 {
                 let name = (snapshot.value as? NSDictionary)?["name"] as? String ?? "name"
@@ -96,7 +96,7 @@ class ChatViewController: MessagesViewController {
     }
     
     private func insertNewMessage(_ message: Message) {
-        let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
+        let ref = initRef.childByAutoId()
         let messageJson = ["sender_id": message.member.uid, "name": message.member.name, "text": message.text]
         ref.setValue(messageJson)
         
@@ -244,7 +244,7 @@ extension ChatViewController: MessageInputBarDelegate {
         _ inputBar: MessageInputBar,
         didPressSendButtonWith text: String) {
         
-        let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
+        let ref = initRef.childByAutoId()
         let message = ["sender_id": member.uid, "name": member.name, "text": text]
         ref.setValue(message)
         
