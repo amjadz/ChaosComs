@@ -70,6 +70,11 @@ class RegistrationViewController: UIViewController {
     func registerUser(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             guard let user = authResult?.user else { return }
+            if (error == nil) {
+                print("User creation successful!")
+            } else {
+                print("Error: " + ((error as? String)!))
+            }
         }
 
     }

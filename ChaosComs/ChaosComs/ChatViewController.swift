@@ -211,7 +211,7 @@ extension ChatViewController: MessagesDataSource {
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         return NSAttributedString(
-            string: "Stoneee",
+            string: member.name,
             attributes: [.font: UIFont.systemFont(ofSize: 12)])
     }
 }
@@ -253,3 +253,9 @@ extension ChatViewController: MessageInputBarDelegate {
         inputBar.inputTextView.text = ""
     }
 }
+
+//extension ChatViewController: MessageCellDelegate {
+//    func didTapMessage(in cell: MessageCollectionViewCell) {
+//        print("YAYY")
+//    }
+//}

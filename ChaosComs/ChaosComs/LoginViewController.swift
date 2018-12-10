@@ -37,14 +37,6 @@ class LoginViewController: UIViewController {
         
     }
     
-    
-    @IBAction func login_to_message(_ sender: Any) {
-        let login_to_message = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-        
-        self.navigationController?.pushViewController(login_to_message, animated: true)
-        
-    }
-    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if let target = segue.destination as? SelectUserTableViewController {
 //            target.member = User()
@@ -54,9 +46,13 @@ class LoginViewController: UIViewController {
     func loginFirebase(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error == nil {
-                let loginScreenToMessage = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-                
-                self.navigationController?.pushViewController(loginScreenToMessage, animated: true)
+                print("Login Successful!")
+//                let email = Auth.auth().currentUser?.email
+//                var ref = Constants.refs.databaseRoot.child("users")
+//                var query = ref.queryEqual(toValue: email, childKey: "email").queryLimited(toFirst: 1)
+//                print(query)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
+                self.present(vc, animated: true, completion: nil)
             } else {
                 print("Login Failed!")
             }
@@ -72,15 +68,4 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
