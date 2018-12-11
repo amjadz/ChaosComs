@@ -46,7 +46,6 @@
                                 <connections>
                                     <action selector="go_back:" destination="hqc-bR-z22" eventType="touchUpInside" id="3ZY-1K-lMC"/>
                                     <action selector="go_back:" destination="xOg-5h-IRC" eventType="touchUpInside" id="zQm-dM-98h"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="go_back" id="5Pc-bJ-ZyQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -132,7 +131,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9K4-z0-Quj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="399.19999999999999" y="-631.0344827586207"/>
+            <point key="canvasLocation" x="159" y="-433"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="eRw-A3-p6p">
@@ -147,7 +146,7 @@
                                 <items>
                                     <barButtonItem title="Back" id="2DI-HJ-n91">
                                         <connections>
-                                            <segue destination="BdH-yq-nYZ" kind="show" id="Cy6-wG-A7t"/>
+                                            <action selector="goBackToSelectUser:" destination="R5O-DH-ZQY" id="DgG-yt-Vzf"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -167,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wh8-Mm-r0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290.4000000000001" y="-629.2353823088456"/>
+            <point key="canvasLocation" x="1017" y="-433"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -203,7 +202,6 @@
                                 </state>
                                 <connections>
                                     <action selector="registe_button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WCd-As-iWE"/>
-                                    <segue destination="BdH-yq-nYZ" kind="show" identifier="message_screen" id="BEA-MR-Hhw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Un-vj-owU">
@@ -211,7 +209,6 @@
                                 <state key="normal" title="Have an account? Login"/>
                                 <connections>
                                     <action selector="login_screen_button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="73z-Ss-5v6"/>
-                                    <segue destination="hqc-bR-z22" kind="show" identifier="go_back" id="tTD-22-Idz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -243,11 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-770" y="67"/>
+            <point key="canvasLocation" x="-770" y="8"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="56J-7I-XMZ"/>
-        <segue reference="Cy6-wG-A7t"/>
-    </inferredMetricsTieBreakers>
 </document>

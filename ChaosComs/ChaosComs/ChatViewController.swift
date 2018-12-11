@@ -19,6 +19,12 @@ class ChatViewController: MessagesViewController {
     var selectedUser: User!
     var initRef: DatabaseReference!
     
+    @IBAction func goBackToSelectUser(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+        
+        
+    }
+    
     let tagger: NSLinguisticTagger = NSLinguisticTagger(tagSchemes: [.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
     let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
     
