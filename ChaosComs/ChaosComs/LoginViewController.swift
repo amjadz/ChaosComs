@@ -11,6 +11,7 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
+    var member: User!
     
     @IBOutlet weak var email_login: UITextField!
     
@@ -38,31 +39,35 @@ class LoginViewController: UIViewController {
     }
     
     func loginFirebase(email: String, password: String){
+        
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            
             if error == nil {
                 print("Login Successful!")
                 let email = Auth.auth().currentUser?.email
                 var ref = Constants.refs.databaseRoot.child("users")
                 var query = ref.queryOrdered(byChild: "email").queryEqual(toValue: email)
                 var userName: String = "someuser"
+                
                 query.observe(.value, with: { (snapshot) in
+                    
                     if snapshot.childrenCount > 0 {
+                        
                         if let snapDict = snapshot.value as? [String:AnyObject]{
                             for each in snapDict{
-                                userName = each.value["name"] as! String
+                                let holder = each.value["name"] as! String
+                                self.member = User(name: holder, uid: email ?? "no uid")
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
+                                vc.member = self.member
+                                self.present(vc, animated: true, completion: nil)
                             }
                         }
                     }
                 })
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-                vc.member = User(name: userName, uid: email ?? "no uid")
-                self.present(vc, animated: true, completion: nil)
             } else {
                 print("Login Failed!")
             }
         }
-        
-        
     }
     
     
