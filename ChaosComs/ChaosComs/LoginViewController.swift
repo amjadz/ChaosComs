@@ -37,21 +37,25 @@ class LoginViewController: UIViewController {
         
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let target = segue.destination as? SelectUserTableViewController {
-//            target.member = User()
-//        }
-//    }
-    
     func loginFirebase(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error == nil {
                 print("Login Successful!")
-//                let email = Auth.auth().currentUser?.email
-//                var ref = Constants.refs.databaseRoot.child("users")
-//                var query = ref.queryEqual(toValue: email, childKey: "email").queryLimited(toFirst: 1)
-//                print(query)
+                let email = Auth.auth().currentUser?.email
+                var ref = Constants.refs.databaseRoot.child("users")
+                var query = ref.queryOrdered(byChild: "email").queryEqual(toValue: email)
+                var userName: String = "someuser"
+                query.observe(.value, with: { (snapshot) in
+                    if snapshot.childrenCount > 0 {
+                        if let snapDict = snapshot.value as? [String:AnyObject]{
+                            for each in snapDict{
+                                userName = each.value["name"] as! String
+                            }
+                        }
+                    }
+                })
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
+                vc.member = User(name: userName, uid: email ?? "no uid")
                 self.present(vc, animated: true, completion: nil)
             } else {
                 print("Login Failed!")

@@ -29,7 +29,6 @@ class ChatViewController: MessagesViewController {
 
         // Do any additional setup after loading the view.
         color = .random
-        member = User(name: Auth.auth().currentUser?.displayName ?? "someuser", uid: Auth.auth().currentUser?.uid ?? "1234")
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
