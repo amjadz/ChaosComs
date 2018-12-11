@@ -83,7 +83,6 @@ class ChatViewController: MessagesViewController {
     func startRequestData(query: String, text: String, ref: DatabaseReference) {
         
         let params: [String: Any] = ["part":"snippet", "q":"\(query)", "type":"video", "key":"AIzaSyAdV6HRuk3Cz7MgNXbBzClwqlZDjBVOaJc"]
-        var vidID = ""
         var thumbnailURL = ""
         
         AF.request("https://www.googleapis.com/youtube/v3/search", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
@@ -92,20 +91,20 @@ class ChatViewController: MessagesViewController {
                 if let items =  JSON["items"] as? [[String : Any]] {
                     let item = items[0]
                     let ids = item["id"] as? NSDictionary
-                    vidID = (ids?["videoId"] as? String)!
+                    let vidID = (ids?["videoId"] as? String)!
                     let itemDescription = item["snippet"] as? NSDictionary
                     let thumbnails = itemDescription?["thumbnails"] as? NSDictionary
                     let defaultThumbnail = thumbnails?["medium"] as? NSDictionary
                     let defaultURL = defaultThumbnail?["url"] as? String
                     thumbnailURL = defaultURL ?? ""
-                    // print(item)
-                    let message = ["sender_id": self.member.uid, "name": self.member.name, "text": text]
-                    let imageMessage = ["sender_id": self.member.uid, "name": self.member.name, "vidID": vidID, "imageURL": thumbnailURL]
-                    ref.setValue(message)
-                    let Newref = Constants.refs.databaseChats.child(self.member.name + self.selectedUser.name).childByAutoId()
-                    Newref.setValue(imageMessage)
                     self.videoID = vidID
                     print(vidID)
+                    // print(item)
+                    let message = ["sender_id": self.member.uid, "name": self.member.name, "text": text, "vidID": vidID]
+                    //let imageMessage = ["sender_id": self.member.uid, "name": self.member.name, "vidID": vidID, "imageURL": thumbnailURL]
+                    ref.setValue(message)
+                    //let Newref = Constants.refs.databaseChats.child(self.member.name + self.selectedUser.name).childByAutoId()
+                    //Newref.setValue(imageMessage)
                 }
             }
         }
@@ -127,6 +126,20 @@ class ChatViewController: MessagesViewController {
         //partsOfSpeech(for: text)
         // self.namedEntityRecognition(for: text, messageText: text, ref: ref)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let target = segue.destination as? YoutubeController {
+            print(self.videoID)
+            if (self.videoID == "") {
+                self.videoID = "IYnsfV5N2n8"
+                target.videoID = self.videoID
+                
+            } else {
+                target.videoID = self.videoID
+            }
+        }
+    }
+    
     
     private func tokenizeText(for text: String) {
         tagger.string = text
