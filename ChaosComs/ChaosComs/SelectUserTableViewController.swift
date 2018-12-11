@@ -68,6 +68,7 @@ class SelectUserTableViewController: UITableViewController {
         if let target = segue.destination as? ChatViewController {
             target.selectedUser = users[selectedPath.row]
             target.member = self.member
+            print(self.member)
         }
     }
 }

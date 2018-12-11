@@ -57,6 +57,7 @@ class LoginViewController: UIViewController {
                             for each in snapDict{
                                 let holder = each.value["name"] as! String
                                 self.member = User(name: holder, uid: email ?? "no uid")
+                                print(self.member)
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
                                 vc.member = self.member
                                 self.present(vc, animated: true, completion: nil)
