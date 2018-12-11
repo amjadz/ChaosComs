@@ -40,30 +40,29 @@ class RegistrationViewController: UIViewController {
         }
 
         registerUser(email: emailText, password: passwordText)
-        
-        
-        let ref: DatabaseReference! = Database.database().reference()
-        let currentUser = Auth.auth().currentUser
-        
-        guard let currentUserID = currentUser?.uid else { return }
-        
-        let userIDRef = ref.child("users").child(currentUserID)
-        let userUid = userIDRef.child("uid")
-        let nameRef = userIDRef.child("name")
-        let passwordRef = userIDRef.child("password")
-        let emailRef = userIDRef.child("email")
-
-
-        nameRef.setValue(username.text)
-        passwordRef.setValue(passwordText)
-        emailRef.setValue(emailText)
-        userUid.setValue(currentUserID)
-        
-        let selectUserScreen = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-        
-        
-        self.present(selectUserScreen, animated: true, completion: nil)
-
+        Auth.auth().signIn(withEmail: emailText, password: passwordText) { (user, error) in
+            let ref: DatabaseReference! = Database.database().reference()
+            let currentUser = Auth.auth().currentUser
+            
+            guard let currentUserID = currentUser?.uid else { return }
+            
+            let userIDRef = ref.child("users").child(currentUserID)
+            let userUid = userIDRef.child("uid")
+            let nameRef = userIDRef.child("name")
+            let passwordRef = userIDRef.child("password")
+            let emailRef = userIDRef.child("email")
+            
+            
+            nameRef.setValue(self.username.text)
+            passwordRef.setValue(passwordText)
+            emailRef.setValue(emailText)
+            userUid.setValue(currentUserID)
+            
+            let selectUserScreen = self.storyboard?.instantiateViewController(withIdentifier: "go_back") as! LoginViewController
+            
+            
+            self.present(selectUserScreen, animated: true, completion: nil)
+        }
         
     }
     
