@@ -152,6 +152,16 @@
                                             <segue destination="BdH-yq-nYZ" kind="show" id="Cy6-wG-A7t"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" id="dGp-O0-Agd">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="03n-35-bEa">
+                                            <rect key="frame" x="65" y="7" width="44" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Chaos"/>
+                                            <connections>
+                                                <segue destination="SgO-86-hbr" kind="show" identifier="YoutubeController" id="f3L-bk-ead"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -170,6 +180,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wh8-Mm-r0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1290.4000000000001" y="-629.2353823088456"/>
+        </scene>
+        <!--Youtube Controller-->
+        <scene sceneID="rKm-1G-d7t">
+            <objects>
+                <viewController id="SgO-86-hbr" customClass="YoutubeController" customModule="ChaosComs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1gv-Td-7nL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wyg-Bb-VIA" userLabel="backView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Back" id="Lpi-d0-KK1">
+                                        <connections>
+                                            <action selector="dism:" destination="SgO-86-hbr" id="KBt-cU-gf2"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ay7-vA-1o7" customClass="YTPlayerView">
+                                <rect key="frame" x="16" y="64" width="343" height="184"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ay7-vA-1o7" firstAttribute="top" secondItem="Wyg-Bb-VIA" secondAttribute="bottom" id="CjG-qk-h4m"/>
+                            <constraint firstItem="Wyg-Bb-VIA" firstAttribute="top" secondItem="xLQ-aD-Zcc" secondAttribute="top" id="IMJ-er-b3b"/>
+                            <constraint firstItem="xLQ-aD-Zcc" firstAttribute="bottom" secondItem="ay7-vA-1o7" secondAttribute="bottom" constant="419" id="LWo-ez-HYh"/>
+                            <constraint firstItem="Wyg-Bb-VIA" firstAttribute="leading" secondItem="1gv-Td-7nL" secondAttribute="leading" id="SV1-8p-gMu"/>
+                            <constraint firstItem="ay7-vA-1o7" firstAttribute="centerX" secondItem="Wyg-Bb-VIA" secondAttribute="centerX" id="YNi-9O-DOe"/>
+                            <constraint firstItem="ay7-vA-1o7" firstAttribute="leading" secondItem="1gv-Td-7nL" secondAttribute="leadingMargin" id="ZKV-Yd-7GR"/>
+                            <constraint firstAttribute="trailing" secondItem="Wyg-Bb-VIA" secondAttribute="trailing" id="sHf-mP-MUk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xLQ-aD-Zcc"/>
+                    </view>
+                    <connections>
+                        <outlet property="playerView" destination="ay7-vA-1o7" id="Xs2-eW-vNs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rIc-Hh-cUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2182" y="-594"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -250,6 +303,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Cy6-wG-A7t"/>
-        <segue reference="Qzx-wP-S7P"/>
+        <segue reference="tTD-22-Idz"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21D6E697495084EC06375D6E /* Pods_ChaosComs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19AB12883F55F3D657398BE6 /* Pods_ChaosComs.framework */; };
+		57B1ECB121BF365F000CF195 /* YoutubeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1ECB021BF365F000CF195 /* YoutubeController.swift */; };
 		5806575A21ADE87B006F5A70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806575921ADE87B006F5A70 /* LoginViewController.swift */; };
 		58094A4521AC5BF4000942CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58094A4421AC5BF4000942CF /* AppDelegate.swift */; };
 		58094A4721AC5BF4000942CF /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58094A4621AC5BF4000942CF /* RegistrationViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		19AB12883F55F3D657398BE6 /* Pods_ChaosComs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaosComs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57B1ECB021BF365F000CF195 /* YoutubeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeController.swift; sourceTree = "<group>"; };
 		5806575921ADE87B006F5A70 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		58094A4121AC5BF4000942CF /* ChaosComs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChaosComs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58094A4421AC5BF4000942CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				58094A4421AC5BF4000942CF /* AppDelegate.swift */,
+				57B1ECB021BF365F000CF195 /* YoutubeController.swift */,
 				58094A4621AC5BF4000942CF /* RegistrationViewController.swift */,
 				58094A4821AC5BF4000942CF /* Main.storyboard */,
 				9D0B75CA21B667AD000483FD /* ChatViewController.swift */,
@@ -184,7 +187,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ChaosComs/Pods-ChaosComs-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ChaosComs/Pods-ChaosComs-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework",
@@ -197,6 +201,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageInputBar.framework",
@@ -207,7 +212,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChaosComs/Pods-ChaosComs-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaosComs/Pods-ChaosComs-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C0D2CFB5AB48F8CE37067090 /* [CP] Check Pods Manifest.lock */ = {
@@ -242,6 +247,7 @@
 				5806575A21ADE87B006F5A70 /* LoginViewController.swift in Sources */,
 				5861CAAC21B492E50067960F /* SelectUserTableViewController.swift in Sources */,
 				58094A4721AC5BF4000942CF /* RegistrationViewController.swift in Sources */,
+				57B1ECB121BF365F000CF195 /* YoutubeController.swift in Sources */,
 				9D0B75CD21B7411A000483FD /* Message.swift in Sources */,
 				9D0B75CB21B667AD000483FD /* ChatViewController.swift in Sources */,
 				58094A4521AC5BF4000942CF /* AppDelegate.swift in Sources */,

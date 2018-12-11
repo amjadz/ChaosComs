@@ -55,6 +55,9 @@ struct Message {
     let member: User
     let text: String
     let messageId: String
+    let videoID: String
+    let imageURL: String
+    let image: UIImageView
 }
 
 extension Message: MessageType {
