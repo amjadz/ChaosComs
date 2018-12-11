@@ -22,7 +22,7 @@ class RegistrationViewController: UIViewController {
 
         let loginScreen = self.storyboard?.instantiateViewController(withIdentifier: "go_back") as! LoginViewController
         
-        self.navigationController?.pushViewController(loginScreen, animated: true)
+        self.present(loginScreen, animated: true, completion: nil)
     }
     
     
