@@ -147,7 +147,7 @@
                                 <items>
                                     <barButtonItem title="Back" id="2DI-HJ-n91">
                                         <connections>
-                                            <segue destination="BdH-yq-nYZ" kind="show" id="Cy6-wG-A7t"/>
+                                            <action selector="goBackToSelectUser:" destination="R5O-DH-ZQY" id="DgG-yt-Vzf"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -246,8 +246,4 @@
             <point key="canvasLocation" x="-770" y="67"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="56J-7I-XMZ"/>
-        <segue reference="Cy6-wG-A7t"/>
-    </inferredMetricsTieBreakers>
 </document>
