@@ -32,9 +32,6 @@ class ChatViewController: MessagesViewController {
     
     var videoID = ""
     
-    let tagger: NSLinguisticTagger = NSLinguisticTagger(tagSchemes: [.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
-    let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
