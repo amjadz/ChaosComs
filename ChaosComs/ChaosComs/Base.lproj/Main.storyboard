@@ -203,7 +203,6 @@
                                 </state>
                                 <connections>
                                     <action selector="registe_button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WCd-As-iWE"/>
-                                    <segue destination="BdH-yq-nYZ" kind="show" identifier="message_screen" id="BEA-MR-Hhw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Un-vj-owU">
@@ -243,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-770" y="67"/>
+            <point key="canvasLocation" x="-770" y="68"/>
         </scene>
     </scenes>
 </document>

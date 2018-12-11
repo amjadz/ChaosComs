@@ -41,10 +41,6 @@ class RegistrationViewController: UIViewController {
 
         registerUser(email: emailText, password: passwordText)
         
-        let selectUserScreen = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-            
-        self.navigationController?.pushViewController(selectUserScreen, animated: true)
-        
         
         let ref: DatabaseReference! = Database.database().reference()
         let currentUser = Auth.auth().currentUser
@@ -58,12 +54,16 @@ class RegistrationViewController: UIViewController {
         let emailRef = userIDRef.child("email")
 
 
-        print(nameRef.setValue(username.text))
+        nameRef.setValue(username.text)
         passwordRef.setValue(passwordText)
         emailRef.setValue(emailText)
         userUid.setValue(currentUserID)
         
+        let selectUserScreen = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
         
+        
+        self.present(selectUserScreen, animated: true, completion: nil)
+
         
     }
     
