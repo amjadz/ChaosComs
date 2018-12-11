@@ -28,10 +28,6 @@ class LoginViewController: UIViewController {
         
         loginFirebase(email: email_login_text, password: password_login_text)
         
-        let loginScreenToMessage = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-        
-        self.navigationController?.pushViewController(loginScreenToMessage, animated: true)
-        
     }
     
     
@@ -41,24 +37,31 @@ class LoginViewController: UIViewController {
         
     }
     
-    
-    @IBAction func login_to_message(_ sender: Any) {
-        let login_to_message = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
-        
-        self.navigationController?.pushViewController(login_to_message, animated: true)
-        
-    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let target = segue.destination as? SelectUserTableViewController {
-//            target.member = User()
-//        }
-//    }
-    
     func loginFirebase(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            print("Works")
+            if error == nil {
+                print("Login Successful!")
+                let email = Auth.auth().currentUser?.email
+                var ref = Constants.refs.databaseRoot.child("users")
+                var query = ref.queryOrdered(byChild: "email").queryEqual(toValue: email)
+                var userName: String = "someuser"
+                query.observe(.value, with: { (snapshot) in
+                    if snapshot.childrenCount > 0 {
+                        if let snapDict = snapshot.value as? [String:AnyObject]{
+                            for each in snapDict{
+                                userName = each.value["name"] as! String
+                            }
+                        }
+                    }
+                })
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "message_screen") as! SelectUserTableViewController
+                vc.member = User(name: userName, uid: email ?? "no uid")
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                print("Login Failed!")
+            }
         }
+        
         
     }
     
@@ -69,15 +72,4 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

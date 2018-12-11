@@ -11,15 +11,22 @@ import MessageKit
 import MessageInputBar
 import Firebase
 import Alamofire
-import youtube_ios_player_helper
 
 class ChatViewController: MessagesViewController {
     var messages: [Message] = []
     var member: User!
     var color: UIColor = .blue
     var selectedUser: User!
-    
     var initRef: DatabaseReference!
+    
+    @IBAction func goBackToSelectUser(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+        
+        
+    }
+    
+    let tagger: NSLinguisticTagger = NSLinguisticTagger(tagSchemes: [.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
+    let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
     
     @IBOutlet weak var backBar: UIToolbar!
     
@@ -33,13 +40,16 @@ class ChatViewController: MessagesViewController {
 
         // Do any additional setup after loading the view.
         color = .random
-        member = User(name: Auth.auth().currentUser?.displayName ?? "someuser", uid: Auth.auth().currentUser?.uid ?? "1234")
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
-        initRef = Constants.refs.databaseChats.child(member.name + selectedUser.name)
+        if member.name < selectedUser.name {
+            initRef = Constants.refs.databaseChats.child(member.name + selectedUser.name)
+        } else {
+            initRef = Constants.refs.databaseChats.child(selectedUser.name + member.name)
+        }
         initRef.queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
             if snapshot.childrenCount > 0 {
                 let name = (snapshot.value as? NSDictionary)?["name"] as? String ?? "name"
@@ -71,71 +81,38 @@ class ChatViewController: MessagesViewController {
         self.view.bringSubviewToFront(backBar)
     }
     
-    private func insertNewMessage(_ message: Message) {
-        let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
-        let messageJson = ["sender_id": message.member.uid, "name": message.member.name, "text": message.text]
-        ref.setValue(messageJson)
-        
-        messagesCollectionView.scrollToBottom(animated: true)
-    }
-    
-    
-    
-    func startRequestData(query: String, text: String, ref: DatabaseReference) {
+    func startRequestData(query: String) {
         
         let params: [String: Any] = ["part":"snippet", "q":"\(query)", "type":"video", "key":"AIzaSyAdV6HRuk3Cz7MgNXbBzClwqlZDjBVOaJc"]
-        var vidID = ""
-        var thumbnailURL = ""
         
         AF.request("https://www.googleapis.com/youtube/v3/search", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             
             if let JSON = response.result.value  as?  [String : Any] {
+                
                 if let items =  JSON["items"] as? [[String : Any]] {
                     let item = items[0]
                     let ids = item["id"] as? NSDictionary
-                    vidID = (ids?["videoId"] as? String)!
+                    //self.vidID = (ids?["videoId"] as? String)!
+                    //print(self.vidID)
+                    //self.playerView.load(withVideoId: self.vidID)
                     let itemDescription = item["snippet"] as? NSDictionary
                     let thumbnails = itemDescription?["thumbnails"] as? NSDictionary
                     let defaultThumbnail = thumbnails?["medium"] as? NSDictionary
                     let defaultURL = defaultThumbnail?["url"] as? String
-                    thumbnailURL = defaultURL ?? ""
-                    // print(item)
-                    let message = ["sender_id": self.member.uid, "name": self.member.name, "text": text]
-                    let imageMessage = ["sender_id": self.member.uid, "name": self.member.name, "vidID": vidID, "imageURL": thumbnailURL]
-                    ref.setValue(message)
-                    let Newref = Constants.refs.databaseChats.child(self.member.name + self.selectedUser.name).childByAutoId()
-                    Newref.setValue(imageMessage)
-                    self.videoID = vidID
+                    print(item)
+                    //print(defaultURL)
+                    //self.loadImage(img: defaultURL ?? "")
                 }
             }
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let target = segue.destination as? YoutubeController {
-            if (self.videoID == "") {
-                self.videoID = "IYnsfV5N2n8"
-            } else {
-                target.videoID = self.videoID
-            }
-        }
-    }
-    
-    
-    func loadImageOnly(member: User, messageId: String, vidID: String, imageURL: String) {
-        let imageUrl:URL = URL(string: imageURL)!
+    private func insertNewMessage(_ message: Message) {
+        let ref = initRef.childByAutoId()
+        let messageJson = ["sender_id": message.member.uid, "name": message.member.name, "text": message.text]
+        ref.setValue(messageJson)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            let imageData:NSData = NSData(contentsOf: imageUrl)!
-            DispatchQueue.main.async {
-                let image = UIImage(data: imageData as Data)
-                let view = UIImageView()
-                view.image = image
-                let loadmsg = Message(member: member, text: "", messageId: messageId, videoID: vidID, imageURL: imageURL, image: view)
-                self.messages.append(loadmsg)
-                self.messagesCollectionView.reloadData()
-            }
-        }
+        messagesCollectionView.scrollToBottom(animated: true)
     }
     
     private func determineLanguage(for text: String) {
@@ -144,7 +121,7 @@ class ChatViewController: MessagesViewController {
         print("The language is \(language)")
         //tokenizeText(for: text)
         //partsOfSpeech(for: text)
-        // namedEntityRecognition(for: text)
+        namedEntityRecognition(for: text)
     }
     
     private func tokenizeText(for text: String) {
@@ -167,29 +144,46 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    
-    private func namedEntityRecognition(for text: String, messageText: String, ref: DatabaseReference) {
+    private func namedEntityRecognition(for text: String) {
         tagger.string = text
-        var textTags: [String] = []
         let range = NSRange(location: 0, length: text.utf16.count)
-        let tags: [NSLinguisticTag] = [.personalName, .placeName, .organizationName, .noun, .verb, .adjective]
+        let tags: [NSLinguisticTag] = [.personalName, .placeName, .organizationName, .noun, .verb]
         tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, stop in
             if let tag = tag, tags.contains(tag) {
                 let name = (text as NSString).substring(with: tokenRange)
-                textTags.append(name)
                 print("\(name): \(tag.rawValue)")
             }
         }
-        if (textTags.count == 0) {
-            startRequestData(query: "asdf", text: messageText, ref: ref)
-        } else if (textTags.count == 1) {
-            startRequestData(query: textTags[0], text: messageText, ref: ref)
-        } else {
-            startRequestData(query: "\(String(describing: textTags.randomElement())) \(String(describing: textTags.randomElement()))", text: messageText, ref: ref)
-        }
     }
     
+//    private func loadImage(img: String) {
+//        let imageUrl:URL = URL(string: img)!
+//        
+//        // Start background thread so that image loading does not make app unresponsive
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            
+//            let imageData:NSData = NSData(contentsOf: imageUrl)!
+//            let imageView = self.imgContainer
+//            imageView?.center = self.view.center
+//            let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.tappedImage))
+//            self.imgContainer.isUserInteractionEnabled = true
+//            self.imgContainer.addGestureRecognizer(singleTap)
+//            
+//            // When from background thread, UI needs to be updated on main_queue
+//            DispatchQueue.main.async {
+//                let image = UIImage(data: imageData as Data)
+//                imageView?.image = image
+//            }
+//        }
+//    }
+//    
+//    @objc func tappedImage() {
+//        print("tapped image")
+//        
+//    }
     
+    
+
 }
 
 extension ChatViewController: MessagesDataSource {
@@ -228,7 +222,7 @@ extension ChatViewController: MessagesDataSource {
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         return NSAttributedString(
-            string: "Stoneee",
+            string: member.name,
             attributes: [.font: UIFont.systemFont(ofSize: 12)])
     }
 }
@@ -261,12 +255,18 @@ extension ChatViewController: MessageInputBarDelegate {
         _ inputBar: MessageInputBar,
         didPressSendButtonWith text: String) {
         
-        let ref = Constants.refs.databaseChats.child(member.name + selectedUser.name).childByAutoId()
-        self.namedEntityRecognition(for: text, messageText: text, ref: ref)
+        let ref = initRef.childByAutoId()
+        let message = ["sender_id": member.uid, "name": member.name, "text": text]
+        ref.setValue(message)
         
-        //let message = ["sender_id": member.uid, "name": member.name, "text": text]
-        //ref.setValue(message)
+        self.namedEntityRecognition(for: text)
         
         inputBar.inputTextView.text = ""
     }
 }
+
+//extension ChatViewController: MessageCellDelegate {
+//    func didTapMessage(in cell: MessageCollectionViewCell) {
+//        print("YAYY")
+//    }
+//}

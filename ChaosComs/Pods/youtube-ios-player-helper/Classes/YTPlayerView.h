@@ -15,7 +15,6 @@
 #import <UIKit/UIKit.h>
 #import "YTPlayerView.h"
 
-
 @class YTPlayerView;
 
 /** These enums represent the state of the current video in the player. */

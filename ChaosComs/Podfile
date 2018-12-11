@@ -8,6 +8,7 @@ target 'ChaosComs' do
   # Pods for ChaosComs
 	pod 'Firebase/Core'
 	pod "youtube-ios-player-helper", "~> 0.1.4"
+  pod 'Alamofire', '~> 5.0.0.beta.1'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'	
 	pod 'MessageKit'

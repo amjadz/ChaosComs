@@ -51,6 +51,31 @@ extension User {
     }
 }
 
+struct VideoMessage {
+    let member: User
+    let thumbnail: MediaItem
+    let videoID: String
+    let messageID: String
+}
+
+extension VideoMessage: MessageType {
+    var messageId: String {
+        return messageID
+    }
+    
+    var sender: Sender {
+        return Sender(id: member.uid, displayName: member.name)
+    }
+
+    var sentDate: Date {
+        return Date()
+    }
+    
+    var kind: MessageKind {
+        return .photo(thumbnail)
+    }
+}
+
 struct Message {
     let member: User
     let text: String

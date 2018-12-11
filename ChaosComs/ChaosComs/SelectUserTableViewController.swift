@@ -19,6 +19,7 @@ class SelectUserTableViewController: UITableViewController {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            print("Signed Out")
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
@@ -66,6 +67,7 @@ class SelectUserTableViewController: UITableViewController {
         guard let selectedPath = tableView.indexPathForSelectedRow else { return }
         if let target = segue.destination as? ChatViewController {
             target.selectedUser = users[selectedPath.row]
+            target.member = self.member
         }
     }
 }
